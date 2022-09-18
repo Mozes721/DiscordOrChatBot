@@ -2,6 +2,22 @@ from abc import ABC, abstractmethod
 import tweepy
 import time
 
+class TwitterMethods(ABC):
+    
+    @abstractmethod
+    def say_hello(self) -> None:
+        pass
+
+    @abstractmethod
+    def get_weather(self) -> None:
+        pass
+    @abstractmethod
+    def get_crypto(self) -> None:
+        pass
+    @abstractmethod
+    def get_stock(self) -> None:
+        pass
+
  
 auth = tweepy.OAuth1UserHandler('y0bdWj5JjGUvFqjP9kaYJ8biF', '0HzXorh6ycHXVMSf2TQGKTwAAGR26QCVj6NWxdDbu7jstBKyC7')
 
