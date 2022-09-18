@@ -1,35 +1,37 @@
-from abc import ABC, abstractmethod
+from http import client
+from pydoc import cli
+from scripts.twitter_response import TwitterResponseAPI
+from config.config_files import APIkeys
 import tweepy
 import time
 
-class TwitterMethods(ABC):
-    
-    @abstractmethod
-    def say_hello(self) -> None:
-        pass
+def connect():
+    client = tweepy.Client(APIkeys.BearerToken, APIkeys.APIKey, APIkeys.APIKeySecret, APIkeys.AccessToken, APIkeys.AccessTokenSecret)
+    auth = tweepy.OAuth1UserHandler(APIkeys.APIKey, APIkeys.APIKeySecret, APIkeys.AccessToken, APIkeys.AccessTokenSecret)
+    api = tweepy.API(auth)
+    client_id = client.get_me().data.id
+    return client_id
 
-    @abstractmethod
-    def get_weather(self) -> None:
-        pass
-    @abstractmethod
-    def get_crypto(self) -> None:
-        pass
-    @abstractmethod
-    def get_stock(self) -> None:
-        pass
+    tweet = TwitterResponseAPI(twitterUser='Charlie')
 
- 
-auth = tweepy.OAuth1UserHandler('y0bdWj5JjGUvFqjP9kaYJ8biF', '0HzXorh6ycHXVMSf2TQGKTwAAGR26QCVj6NWxdDbu7jstBKyC7')
+    print(tweet.say_hello())
 
-auth.set_access_token('1552932201402191872-uOJrC5ov7eKcaxoUYjvGwcapVl76zF', 'txDDfjApo8OaAThTqT1DbL6VKAIH9CvJEaNBw181y4Lml')
-
-api = tweepy.API(auth, wait_on_rate_limit=True)
-
-user = api.get_profile_banner()
-
-
-def main():
-    pass
+def check_tweets(response):
+    for tweet in response.data:
+                try:
+                    print(tweet.text)
+                    client.create_tweet(in_reply_to_tweet_id=tweet.id, text='hello')
+                    start_id = tweet.id
+                except:
+                    pass
 
 if __name__ == '__main__':
-    main()
+    start_id = 1
+    twitter_bot = connect()
+    while True:
+        response = twitter_bot.get_users_mentions(twitter_bot, since_id=start_id)
+        if response.data != None:
+            check_tweets(response)
+        time.sleep(5)
+
+    
