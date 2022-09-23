@@ -1,22 +1,17 @@
-from configparser import ConfigParser 
+import os
+from dotenv import load_dotenv, find_dotenv
 from dataclasses import dataclass
 
-
-file = 'config.ini'
-config = ConfigParser()
-config.read(file)
-
-print(config.sections())
-
+load_dotenv(find_dotenv())
 @dataclass(frozen=True)
 class APIkeys:
-    APIKey: str = config['twitter']['APIKey']
-    APIKeySecret: str = config['twitter']['APIKeySecret']
-    BearerToken: str = config['twitter']['BearerToken']
-    AccessToken: str = config['twitter']['AccessToken']
-    AccessTokenSecret: str = config['twitter']['AccessTokenSecret']
-    weatherAPI: str = config['api']['weatherAPI']
-    cryptoAPI: str = config['api']['cryptoAPI']
-    weatherAPI: str = config['api']['stockAPI']
-    
-print(APIkeys.cryptoAPI)
+    weatherAPI: str = os.getenv('weatherAPI')
+    cryptoAPI: str = os.getenv('cryptoAPI')
+
+    APIKey: str = os.getenv('APIKey')
+    APIKeySecret: str = os.getenv('APIKeySecret')
+    BearerToken: str = os.getenv('BearerToken')
+    AccessToken: str = os.getenv('AccessToken')
+    AccessTokenSecret: str = os.getenv('AccessTokenSecret')
+
+print(APIkeys.weatherAPI)
