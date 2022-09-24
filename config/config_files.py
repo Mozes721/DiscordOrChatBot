@@ -7,11 +7,9 @@ load_dotenv(find_dotenv())
 class APIkeys:
     weatherAPI: str = os.getenv('weatherAPI')
     cryptoAPI: str = os.getenv('cryptoAPI')
-
+    stockAPI: str = os.getenv('stockAPI')
     APIKey: str = os.getenv('APIKey')
     APIKeySecret: str = os.getenv('APIKeySecret')
     BearerToken: str = os.getenv('BearerToken')
     AccessToken: str = os.getenv('AccessToken')
     AccessTokenSecret: str = os.getenv('AccessTokenSecret')
-
-print(APIkeys.weatherAPI)
