@@ -1,3 +1,5 @@
 env/
-config/config.ini
+
 __init__.py
+__pycache__
+config/.env
