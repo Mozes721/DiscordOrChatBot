@@ -1,9 +1,8 @@
 from dataclasses import dataclass
 from http import client
 import os
-from scripts.twitter_response import TwitterResponseAPI
 from config.config_files import APIkeys
-from api.weather import get_weather_data, get_json_data
+from api.requests import APIRequests
 import tweepy
 import time
 
@@ -51,7 +50,10 @@ class TwitterAPI:
 if __name__ == '__main__':
     client, client_id = connect()
     start_id = 1
-    temp_celsius, temp_fahrenheit = get_weather_data('New York')
+    api_requests = APIRequests()
+    # crypto_price = api_requests.get_crypto_data('BTC', payload)
+    # stock_price = api_requests.get_stock_data('AAPL', payload)
+    weather_data = api_requests.get_weather('New York')
     print(temp_fahrenheit, temp_celsius)
 
     # while True:

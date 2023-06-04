@@ -2,6 +2,7 @@ import time
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 
+
 class TwitterResponseMethods(ABC):
     
     @abstractmethod
@@ -18,6 +19,7 @@ class TwitterResponseMethods(ABC):
     def get_stock(self) -> None:
         pass
 
+
 @dataclass
 class TwitterResponseAPI(TwitterResponseMethods): 
     twitterUser: str 
@@ -31,12 +33,10 @@ class TwitterResponseAPI(TwitterResponseMethods):
     def __post_init__(self):
         if self.weatherRequest is False and self.cryptoRequest is False and self.stockRequest is False:
             print("No question asked yet!") 
-        
-        
 
+     
     def connectToAccount(self):
         pass
-    
     
     @property
     def reply_to_user(self) -> str:
