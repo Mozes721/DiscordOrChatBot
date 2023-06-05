@@ -1,23 +1,7 @@
 from dataclasses import dataclass
-from http import client
-from config.config_files import APIkeys
+from config.connection import connect
 from api.requests import APIRequests
-import tweepy
 import time
-
-
-def connect():
-    client = tweepy.Client(APIkeys.BearerToken, APIkeys.APIKey, APIkeys.APIKeySecret, APIkeys.AccessToken,
-                           APIkeys.AccessTokenSecret)
-    auth = tweepy.OAuth1UserHandler(APIkeys.APIKey, APIkeys.APIKeySecret, APIkeys.AccessToken,
-                                    APIkeys.AccessTokenSecret)
-    api = tweepy.API(auth)
-    client_id = client.get_me().data.id
-    return client, client_id
-
-    # tweet = TwitterResponseAPI(twitterUser='Charlie')
-
-    # print(tweet.say_hello())
 
 
 @dataclass
@@ -47,7 +31,7 @@ class TwitterAPI:
 
 
 if __name__ == '__main__':
-    client, client_id = connect()
+    client, client_id, api = connect()
     start_id = 1
     api_requests = APIRequests()
     # crypto_price = api_requests.get_crypto_data('BTC', payload)

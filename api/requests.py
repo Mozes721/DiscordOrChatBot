@@ -25,7 +25,7 @@ class APIRequests:
         get_open_position = get_values[0]['open']
         return float(get_open_position)
 
-    def get_weather_data(self,location):
+    def get_weather_data(self, location):
         url = Constants.WEATHER_URL.format(api_key=APIkeys.weatherAPI,
                                            location=location)
         weather_data = requests.get(url).json()
