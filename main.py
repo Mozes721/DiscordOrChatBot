@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from http import client
-import os
 from config.config_files import APIkeys
 from api.requests import APIRequests
 import tweepy
@@ -53,8 +52,8 @@ if __name__ == '__main__':
     api_requests = APIRequests()
     # crypto_price = api_requests.get_crypto_data('BTC', payload)
     # stock_price = api_requests.get_stock_data('AAPL', payload)
-    weather_data = api_requests.get_weather('New York')
-    print(temp_fahrenheit, temp_celsius)
+    weather_data = api_requests.get_weather_data('New York')
+
 
     # while True:
     #     response = client.get_users_mentions(client_id, since_id=start_id)
