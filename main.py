@@ -34,10 +34,10 @@ if __name__ == '__main__':
     client, client_id, api = connect()
     start_id = 1
     api_requests = APIRequests()
-    # crypto_price = api_requests.get_crypto_data('BTC', payload)
-    # stock_price = api_requests.get_stock_data('AAPL', payload)
-    weather_data = api_requests.get_weather_data('New York')
-
+    crypto_price = api_requests.get_crypto_data('bitcoin')
+    #stock_price = api_requests.get_stock_data('AAPL')
+    #weather_data = api_requests.get_weather_data('New York')
+    print(crypto_price)
 
     # while True:
     #     response = client.get_users_mentions(client_id, since_id=start_id)

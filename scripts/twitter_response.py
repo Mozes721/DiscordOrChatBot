@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 
 
 class TwitterResponseMethods(ABC):
-    
+
     @abstractmethod
     def say_hello(self) -> None:
         pass
@@ -23,7 +23,7 @@ class TwitterResponseMethods(ABC):
 
 
 @dataclass
-class TwitterResponseAPI(TwitterResponseMethods): 
+class TwitterResponseAPI(TwitterResponseMethods):
     twitterUser: str = field(default=None)
     _twitterUser: str = field(default=None, repr=False)
     weatherRequest: bool = field(default=False)

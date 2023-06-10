@@ -13,9 +13,5 @@ class Constants:
         "&id={location}"
     )
     CRYPTO_URL: str = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest"
-    CRYPTO_PARAMETERS: Dict[str, str] = field(default_factory=lambda: {
-        'slug': '', 'convert': 'USD'}
-        )
-    CRYPTO_HEADERS: Dict[str, str] = field(default_factory=lambda: {
-        'Accepts': 'application/json', 'X-CMC_PRO_API_KEY': ''}
-        )
+    CRYPTO_PARAMETERS: Dict[str, str] = field(default_factory=lambda: {'slug': '', 'convert': 'USD'})
+    CRYPTO_HEADERS: Dict[str, str] = field(default_factory=lambda: {'Accepts': 'application/json', 'X-CMC_PRO_API_KEY': ''})
