@@ -1,29 +1,10 @@
 import time
-from abc import ABC, abstractmethod
+from config.abstract_methods import TwitterResponseMethods
 from dataclasses import dataclass, field
 
 
-class TwitterResponseMethods(ABC):
-
-    @abstractmethod
-    def say_hello(self) -> None:
-        pass
-
-    @abstractmethod
-    def get_weather(self) -> None:
-        pass
-
-    @abstractmethod
-    def get_crypto(self) -> None:
-        pass
-
-    @abstractmethod
-    def get_stock(self) -> None:
-        pass
-
-
 @dataclass
-class TwitterResponseAPI(TwitterResponseMethods):
+class TwitterResponses(TwitterResponseMethods):
     twitterUser: str = field(default=None)
     _twitterUser: str = field(default=None, repr=False)
     weatherRequest: bool = field(default=False)
@@ -41,7 +22,10 @@ class TwitterResponseAPI(TwitterResponseMethods):
     def reply_to_user(self) -> str:
         self._twitterUser = self.twitterUser
 
-        return "Hello, {} ask me any question about stock, crypto prices and even weather in your selected region!".format(self._twitterUser)
+        return (
+            "Hello, {} ask me any question about stock, crypto prices and "
+            "even weather in your selected region!".format(self._twitterUser)
+                )
 
     def say_hello(self) -> None:
         return self.reply_to_user

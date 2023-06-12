@@ -1,4 +1,8 @@
-from helper.format_api_requests import extract_crypto_info, get_city_id, extract_weather_info
+from helper.format_api_requests import (
+                                        extract_crypto_info,
+                                        get_city_id,
+                                        extract_weather_info
+                                        )
 import requests
 from config.config_files import APIkeys
 from config.constants import Constants
