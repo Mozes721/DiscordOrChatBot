@@ -1,48 +1,23 @@
-from dataclasses import dataclass
-from config.connection import connect
+from helper.bot_factory import BotFactory
+
 from api.requests import APIRequests
-from scripts.twitter_response import TwitterResponses
-import time
-import tweepy
+from helper.bot_service import BotService
+from config.config_files import APIkeys
 
+def main():
+    DEPLOYMENT = APIkeys.deployment
 
-@dataclass
-class TwitterAPI:
-    api: tweepy.API
-    start_id: int
-   
+    api_requests = APIRequests()
+    
+    bot_service = BotService(api_requests)
+    
+    bot = BotFactory.create_bot(DEPLOYMENT, bot_service)
 
-    def __post_init__(self):
-        print("Connection has been established..")
-        print("This is a client", self.api)
-
-    def check_tweets(self, response):
-        for tweet in response:
-            try:
-                # print(tweet.user)
-                twitter_responses = TwitterResponses(twitterUser='Casidy')
-                reply_message = twitter_responses.reply_to_user
-                # self.api.update_status(
-                #             in_reply_to_status_id=tweet.id,
-                #             status=reply_message
-                #             )
-                self.start_id = tweet.id
-                # client.create_tweet(in_reply_to_tweet_id=tweet.id, text=reply_message)
-            except Exception as error:
-                raise error
-
+    if DEPLOYMENT:
+        bot.run()
+    else:
+        pass
 
 
 if __name__ == '__main__':
-    client, client_id, api = connect()
-    start_id = 1
-    twitter_api = TwitterAPI(api, start_id)
-    api_requests = APIRequests()
-
-    while True:
-        response = client.get_users_mentions(client_id, since_id=start_id)
-
-        if response.data != None:
-            twitter_api.check_tweets(response.data)
-        
-        time.sleep(5)
+    main()

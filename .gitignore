@@ -1,5 +1,7 @@
 .venv
 __init__.py
 __pycache__
-config/.env
+=3.7
+.idea
 .env
+config/.env
