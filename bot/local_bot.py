@@ -3,7 +3,7 @@ import streamlit as st
 import time
 import random
 
-class LocalBot:
+class LocalBot: 
     def __init__(self) -> None:
        self.initialze_session_state()
        st.title("Simple chat")
