@@ -1,9 +1,11 @@
 from discord import Intents, Client, Message
 from config.config_files import APIkeys
+from model.bart_llm import BartLLM
 
 class DiscordBot:
     def __init__(self, bot_service):
         self.bot_service = bot_service
+        self.bart_llm = BartLLM()
         self.client = Client(intents=Intents.default())
       
         self.register_events()
@@ -22,11 +24,9 @@ class DiscordBot:
             await self.send_message(message, user_message)
 
     def get_response(self, user_message: str) -> str:
-        lowered: str = user_message.lower()
-        if lowered == '':
-            return 'Hello, you are silent!'
-        else:
-            return 'This is a response to your message.'
+        categories = ["crypto", "stock", "weather"]
+        category = self.bart_llm.classify_query(user_message, categories)
+        return f"Query classified as: {category}"
 
     async def send_message(self, message: Message, user_message: str) -> None:
         if not user_message:
@@ -43,4 +43,5 @@ class DiscordBot:
             print(f"Error sending message: {e}")
 
     def run(self):
+        print(APIkeys.discordToken)
         self.client.run(APIkeys.discordToken)

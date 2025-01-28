@@ -1,27 +1,27 @@
+import sys
+import os
 import streamlit as st
-import time
-import random
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from model.bart_llm import BartLLM
 
 class LocalBot:
     def __init__(self) -> None:
         self.initialize_session_state()
+        self.bart_llm = BartLLM()
         st.title("Simple chat")
 
     def initialize_session_state(self):
         if "messages" not in st.session_state:
             st.session_state.messages = []
 
-    def response_generator(self):
-        response = random.choice(
-            [
-                "Hello there! How can I assist you today?",
-                "Hi, human! Is there anything I can help you with?",
-                "Do you need help?",
-            ]
-        )
-        for word in response.split():
-            yield word + " "
-            time.sleep(0.05)
+    def classify_query(self, query: str) -> str:
+        """
+        Classify the user's query and return the category.
+        """
+        category = self.bart_llm.classify_query(query)
+        return f"Query classified as: {category}"
 
     def display_chat_history(self):
         for message in st.session_state.messages:
@@ -39,10 +39,11 @@ class LocalBot:
             with st.chat_message("user"):
                 st.markdown(prompt)
 
+            # Classify the query and generate a response
+            response = self.classify_query(prompt)
             with st.chat_message("assistant"):
-                response = st.write_stream(self.response_generator())
+                st.markdown(response)
             st.session_state.messages.append({"role": "assistant", "content": response})
-
 
 if __name__ == "__main__":
     bot = LocalBot()

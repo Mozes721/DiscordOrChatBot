@@ -1,5 +1,5 @@
-from bot.discord import DiscordBot
 from bot.local_bot import LocalBot
+from bot.discord_bot import DiscordBot
 
 class BotFactory:
     @staticmethod

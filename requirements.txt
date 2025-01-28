@@ -16,14 +16,12 @@ GitPython==3.1.43
 idna==3.7
 Jinja2==3.1.4
 jsonschema==4.23.0
-jsonschema-specifications==2023.12.1
 markdown-it-py==3.0.0
 MarkupSafe==2.1.5
 mdurl==0.1.2
 multidict==6.0.5
 numpy==2.0.0
 packaging==24.1
-pandas==2.2.2
 pillow==10.4.0
 pip==22.0.2
 protobuf==5.27.2
@@ -52,4 +50,5 @@ watchdog==4.0.1
 wheel==0.37.1
 yarl==1.9.4
 pylint==3.2.5
-
+torch==2.5.0
+transformers==4.13.0
